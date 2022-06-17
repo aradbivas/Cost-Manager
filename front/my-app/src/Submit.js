@@ -31,7 +31,7 @@ setValue(prevalue=>({...prevalue,
   
   const handleSubmit=(e)=>{
     e.preventDefault();
-    const res=fetch("http://54.209.76.14:4030/submit",{
+    const res=fetch("http://54.209.76.14:4020/submit",{
       method: 'POST',
       headers:{          
         'Content-Type': 'application/json; charset=utf-8'},
