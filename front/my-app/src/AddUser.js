@@ -34,7 +34,7 @@ export default function Form() {
 
     const handleSubmit=(e)=>{
         e.preventDefault();
-        const res=fetch("http://localhost:4020/adduser",{
+        const res=fetch("server/adduser",{
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json; charset=utf-8'},
