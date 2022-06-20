@@ -38,9 +38,6 @@ const Reports = mongoose.model("reports", reportSchema);
 
 const Category = mongoose.model("category", categorySchema);
 
-app.get("/", function(req,res){
-    res.render("home");
-});
 
 const userSchema = new mongoose.Schema ({
     id:String,
@@ -218,6 +215,6 @@ app.post("/submit", function(req, res){
     });
 });
 
-app.listen(4020, function() {
-    console.log("Server started on port 4020");
+app.listen(4000, function() {
+    console.log("Server started on port 4000");
 });
