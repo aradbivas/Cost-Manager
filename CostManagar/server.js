@@ -2,14 +2,13 @@ require('dotenv').config()
 const express = require("express");
 const app = express();
 app.use(express.json());
-var bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }));
 const mongoose = require('mongoose');
-app.set('view engine', 'ejs');
 app.use(express.json({
     type: ['application/json', 'text/plain']
 }))
-var cors = require('cors')
+const cors = require('cors')
 
 app.use(cors())
 
@@ -27,14 +26,16 @@ const reportSchema = {
     month:String,
     cost : []
 };
-const Cost = mongoose.model("costs", costsSchema);
-const Reports = mongoose.model("reports", reportSchema);
-
 const categorySchema = {
     name:String,
     cost: [costsSchema],
     total: Number
 };
+
+const Cost = mongoose.model("costs", costsSchema);
+const Reports = mongoose.model("reports", reportSchema);
+
+
 const Category = mongoose.model("category", categorySchema);
 
 app.get("/", function(req,res){
@@ -59,12 +60,13 @@ app.get("/report/:year/:month/:userID", function(req,res)
     const year = req.params.year;
     const month = req.params.month;
     const userID = req.params.userID;
+
     User.findOne({id:userID},function (error,foundUser){
         if(!error)
         {
             if(foundUser != null)
             {
-                var arr = [];
+                const arr = [];
 
                 var totalSum = 0;
                 for(let i = 0; i < foundUser.report.length; i++)
@@ -86,6 +88,7 @@ app.get("/report/:year/:month/:userID", function(req,res)
                 arr.push({
                     totalSum:totalSum
                 });
+
                 if(totalSum != 0)
                 {
                     res.status(200).json(arr);
@@ -127,6 +130,7 @@ app.post("/adduser", function(req, res){
                 res.status(400).json("user not found")///msg here to client
             }
             else{
+
                 user.save();
                 res.status(201).json("created");
 
@@ -142,15 +146,15 @@ app.post("/adduser", function(req, res){
 
 app.post("/submit", function(req, res){
     const costDescription = req.body.description;
-    const costid = req.body.id;
+    const costId = req.body.id;
     const totalSum = req.body.sum;
     const costCategory = req.body.category;
     const dateObj = new Date();
-    var month = dateObj.getUTCMonth() + 1; //months from 1-12
-    var year = dateObj.getUTCFullYear();
+    const month = dateObj.getUTCMonth() + 1; //months from 1-12
+    const year = dateObj.getUTCFullYear();
 
     const newItem = new Cost({
-        id:costid,
+        id:costId,
         description:costDescription,
         sum:totalSum,
         year:year,
@@ -162,7 +166,7 @@ app.post("/submit", function(req, res){
         {
             if(foundId === null)
             {
-                res.status(400).json("user not found")///msg here to client
+                res.status(400).json("user not found")
             }
             else{
                 const temp = foundId.category.filter((category) => {return category.name === costCategory;})
