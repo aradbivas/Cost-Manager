@@ -31,7 +31,7 @@ setValue(prevalue=>({...prevalue,
   
   const handleSubmit=(e)=>{
     e.preventDefault();
-    const res=fetch("server:8000/submit",{
+    const res=fetch("server/submit",{
       method: 'POST',
       headers:{          
         'Content-Type': 'application/json; charset=utf-8'},
