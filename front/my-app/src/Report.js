@@ -31,7 +31,7 @@ function inputHandler(e){
   
   const handleSubmit=(e)=>{
     e.preventDefault();
-    var string ="server/8000/report/"+value.year+"/"+value.month+"/"+value.id;
+    var string ="server:8000/report/"+value.year+"/"+value.month+"/"+value.id;
     fetch(string,{'Content-Type': 'application/json'}).then((response) => {
       if(!response.ok) throw new Error(response.status);
       else return response.json();
