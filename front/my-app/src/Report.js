@@ -31,7 +31,7 @@ function inputHandler(e){
   
   const handleSubmit=(e)=>{
     e.preventDefault();
-    var string ="http://localhost:4000/report/"+value.year+"/"+value.month+"/"+value.id;
+    var string ="server/8000/report/"+value.year+"/"+value.month+"/"+value.id;
     fetch(string,{'Content-Type': 'application/json'}).then((response) => {
       if(!response.ok) throw new Error(response.status);
       else return response.json();
@@ -90,18 +90,21 @@ function inputHandler(e){
             <tr>
                 <th>Description</th>
                 <th>Sum</th>
+                <th>Category</th>
                 <th>Total</th>
             </tr>
             </thead>
             <tbody>
                 {users.map(user => ( user.sum != null ?
                     <tr>
-                    <td>{user.description}</td>
-                    <td>{user.sum}</td>
+                    <td key={user.id}>{user.description}</td>
+                    <td key={user.id}>{user.sum}</td>
+                    <td key={user.id}>{user.category}</td>
+
                     </tr>
                     :
                     <tr>
-                        <td colSpan={2}></td>
+                        <td colSpan={3}></td>
                         <td>{user.totalSum}</td>
                     </tr>))}
 
@@ -109,6 +112,5 @@ function inputHandler(e){
         </Table>
       )}
     </div>
-
   );
 }
