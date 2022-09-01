@@ -37,7 +37,7 @@ const handleSubmit= async (e)=>
 
       
       <label>
-        Sum:
+        Price:
         <input
           name="sum"
           type="number"

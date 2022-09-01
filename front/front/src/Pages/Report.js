@@ -2,7 +2,7 @@ import React, { Component,useState } from "react";
 import Table from 'react-bootstrap/Table'
 import {useNavigate} from "react-router-dom";
 import {useReport} from "../hooks/useReport";
-
+import ReportDetails from '../Components/ReportDetaiels'
 export default function Report() {
   const {report, isLoading, array, error} = useReport()
   const [value, setValue] = React.useState({
@@ -62,34 +62,32 @@ function inputHandler(e){
         }
     </form>
           <br/>
+          {array.length > 0 && (
+          <Table striped bordered hover size="sm" variant='dark'>
+              <thead>
+              <tr>
+                  <th>Description</th>
+                  <th>Price</th>
+                  <th>Category</th>
+                  <th>Total</th>
+              </tr>
+              </thead>
+              <tbody>
+              {array.map(user => ( user.sum != null ?
+                  <tr>
+                      <td key={user.id}>{user.description}</td>
+                      <td key={user.id}>{user.sum}</td>
+                      <td key={user.id}>{user.category}</td>
 
-    {array.length > 0 && (
-        <Table striped bordered hover size="sm" variant='dark'>
-            <thead>
-            <tr>
-                <th>Description</th>
-                <th>Sum</th>
-                <th>Category</th>
-                <th>Total</th>
-            </tr>
-            </thead>
-            <tbody>
-                {array.map(user => ( user.sum != null ?
-                    <tr>
-                    <td key={user.id}>{user.description}</td>
-                    <td key={user.id}>{user.sum}</td>
-                    <td key={user.id}>{user.category}</td>
+                  </tr>
+                  :
+                  <tr>
+                      <td colSpan={3}></td>
+                      <td>{user.totalSum}</td>
+                  </tr>))}
 
-                    </tr>
-                    :
-                    <tr>
-                        <td colSpan={3}></td>
-                        <td>{user.totalSum}</td>
-                    </tr>))}
-
-            </tbody>
-        </Table>
-      )}
-    </div>
+              </tbody>
+          </Table>)}
+      </div>
   );
 }

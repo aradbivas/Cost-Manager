@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const Report = require('../Model/ReportModel')
 const requireAuth = require('../middleware/check-auth')
 const {addItem, getItemsByMonthAndYear} = require('../Controllers/ReportController')
 router.use(requireAuth)
