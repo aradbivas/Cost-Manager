@@ -15,6 +15,7 @@ export default function Report() {
               value: '',
           },
   });
+  const [reports, setReports] = React.useState()
 
 function inputHandler(e){
     const {name,value} = e.target;
@@ -27,7 +28,7 @@ function inputHandler(e){
   
   const handleSubmit= async (e)=>{
     e.preventDefault();
-    await report(value.year, value.month);
+   await report(value.year, value.month);
   }
 
   return (
@@ -73,17 +74,17 @@ function inputHandler(e){
               </tr>
               </thead>
               <tbody>
-              {array.map(user => ( user.sum != null ?
+              {array.map(array => ( array.sum != null ?
                   <tr>
-                      <td key={user.id}>{user.description}</td>
-                      <td key={user.id}>{user.sum}</td>
-                      <td key={user.id}>{user.category}</td>
+                      <td key={array.id}>{array.description}</td>
+                      <td key={array.id}>{array.sum}</td>
+                      <td key={array.id}>{array.category}</td>
 
                   </tr>
                   :
                   <tr>
                       <td colSpan={3}></td>
-                      <td>{user.totalSum}</td>
+                      <td>{array.totalSum}</td>
                   </tr>))}
 
               </tbody>
