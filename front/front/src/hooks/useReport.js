@@ -29,8 +29,7 @@ export const useReport = () =>
             if(response.ok)
             {
                 setISLoading(false);
-                console.log(json)
-                setArray(json);
+                    setArray(json);
             }
         }
         else

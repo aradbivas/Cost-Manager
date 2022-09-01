@@ -1,10 +1,18 @@
 const Report = require('../Model/ReportModel')
+const {getReportValidation, addItemValidationValidation} = require("../middleware/Validation");
 
 //get by month and year
+
 const getItemsByMonthAndYear = async (req,res) =>
 {
+    // const {error} = getReportValidation(req.body);
+    // if(error)
+    // {
+    //     return res.status(400).send({error: error.details[0].message});
+    // }
     const year = req.params.year;
     const month = req.params.month;
+    console.log(year +month)
     try
     {
         const report = await Report.findOne({user_id:req.user ,year: year, month: month});
@@ -42,11 +50,15 @@ const getItemsByMonthAndYear = async (req,res) =>
 //add item
 const addItem = async (req, res) =>
 {
-    const {description, sum, category}= req.body;
+    const {error} = addItemValidationValidation(req.body);
+    if(error)
+    {
+        return res.status(400).send({error: error.details[0].message});
+    }
+    const {description, sum, category: categoryName}= req.body;
     const dateObj = new Date();
     const month = dateObj.getUTCMonth() + 1;
     const year = dateObj.getUTCFullYear();
-    const categoryName = category;
     const user_id = req.user;
     const newItem = {
         description:description,

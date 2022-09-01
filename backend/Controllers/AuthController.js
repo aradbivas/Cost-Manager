@@ -1,9 +1,14 @@
 const User =require('../Model/UserModel')
 const bcrypt = require("bcrypt");
 const TokenGenerator = require('../middleware/TokenGenerator')
-
+const {userValidation} = require('../middleware/Validation')
 const login = async (req,res)=>
 {
+    const {error} = userValidation(req.body);
+    if(error)
+    {
+        return res.status(400).json({error: error.details[0].message});
+    }
     try {
         const user = await User.findOne({email: req.body.email});
         if(!user)
@@ -28,7 +33,11 @@ const login = async (req,res)=>
 }
 
 const signup = async (req, res) =>{
-
+    const {error} = userValidation(req.body);
+    if(error)
+    {
+        return res.status(400).json({error: error.details[0].message});
+    }
     const hashedPassword = await bcrypt.hash(req.body.password,10);
     const user = new User({
         email: req.body.email,
