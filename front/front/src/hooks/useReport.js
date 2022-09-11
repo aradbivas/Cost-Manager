@@ -14,7 +14,7 @@ export const useReport = () =>
         setError(null);
         setArray([]);
         if(user){
-            const response = await  fetch('http://localhost:8000/api/report/getreport/' +year + '/' + month,
+            const response = await  fetch('server/api/report/getreport/' +year + '/' + month + '/',
                 {
                     method: 'GET',
                     headers: {'Content-Type': 'application/json',

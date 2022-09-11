@@ -17,6 +17,6 @@ app.use('/api/user', userRoutes)
 mongoose.connect("mongodb+srv://" + process.env.password +"@cluster0.rfa43.mongodb.net/Costs");
 
 
-app.listen(8000, function() {
-    console.log("Server started on port 8000");
+app.listen(4020, function() {
+    console.log("Server started on port 4020");
 });

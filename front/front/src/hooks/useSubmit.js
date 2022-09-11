@@ -15,7 +15,7 @@ export const useSubmit = () =>
         setMessage(null);
         if(user)
         {
-            const response = await  fetch('http://localhost:8000/api/report/addItem',
+            const response = await  fetch('/server/api/report/addItem',
                 {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json',
