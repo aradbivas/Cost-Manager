@@ -10,7 +10,7 @@ export const useLogin = () =>
     {
         setISLoading(true);
         setError(null);
-        const response = await  fetch('/server/api/user/login/',
+        const response = await  fetch("https://cost-manager.onrender.com/api/user/login",
             {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const requireAuth = require('../middleware/check-auth')
-const {addItem, getItemsByMonthAndYear} = require('../Controllers/ReportController')
+const {addItem, getItemsByMonthAndYear, deleteItem} = require('../Controllers/ReportController')
 router.use(requireAuth)
 
 //get reports by year and month
@@ -15,7 +15,7 @@ router.get('/getReport/:year/:month', getItemsByMonthAndYear)
 
 
 //delete report
-
+router.delete('/deleteItem', deleteItem)
 
 
 //update report
@@ -23,6 +23,8 @@ router.get('/getReport/:year/:month', getItemsByMonthAndYear)
 
 //add report
 router.post('/addItem', addItem)
+
+
 
 module.exports = router;
 

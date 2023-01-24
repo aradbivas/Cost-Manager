@@ -25,8 +25,11 @@ const reportSchema = {
             type:String,
             required:true
         },
-    category: [categorySchema]
+    category: [categorySchema],
+
+    month_total: Number
 
 };
 
 module.exports = mongoose.model("Report", reportSchema);
+

@@ -1,94 +1,95 @@
-import React, { Component,useState } from "react";
-import Table from 'react-bootstrap/Table'
-import {useNavigate} from "react-router-dom";
+import React, {useEffect} from "react";
 import {useReport} from "../hooks/useReport";
 import ReportDetails from '../Components/ReportDetaiels'
 export default function Report() {
-  const {report, isLoading, array, error} = useReport()
-  const [value, setValue] = React.useState({
-      month:
-          {
-              value: '',
-          },
-      year:
-          {
-              value: '',
-          },
-  });
-  const [reports, setReports] = React.useState()
-
-function inputHandler(e){
-    const {name,value} = e.target;
-    setValue(prevalue=>({...prevalue,
-      [name]:value
-    }))
-}
 
 
-  
-  const handleSubmit= async (e)=>{
-    e.preventDefault();
-   await report(value.year, value.month);
-  }
+    const {getReports, deleteReport,isLoading, array, error, total} = useReport()
+    const [value, setValue] = React.useState({
+        month:
+            {
+                value: '',
+            },
+        year:
+            {
+                value: '',
+            },
+    });
 
-  return (
-      <div>
-    <form onSubmit={handleSubmit} >
-      <h1>Report</h1>
+    function inputHandler(e){
+        const {name,value} = e.target;
+        setValue(prevalue=>({...prevalue,
+            [name]:value
+        }))
+    }
 
-      <label>
-        Month:
-        <input
-          name="month"
-          type="number"
-          min='1'
-          max='12'
-          required
-          onChange={inputHandler}
-           />
-      </label>
-      <label>
-        Year:
-        <input
-          name="year"
-          type="number"
-          max='2022'
-          required
-          onChange={inputHandler}
-           />
-      </label>
-      <button disabled={isLoading}>Submit</button>
-        {
-            error && <div className='error'>{error}</div>
-        }
-    </form>
-          <br/>
-          {array.length > 0 && (
-          <Table striped bordered hover size="sm" variant='dark'>
-              <thead>
-              <tr>
-                  <th>Description</th>
-                  <th>Price</th>
-                  <th>Category</th>
-                  <th>Total</th>
-              </tr>
-              </thead>
-              <tbody>
-              {array.map(array => ( array.sum != null ?
-                  <tr>
-                      <td key={array.id}>{array.description}</td>
-                      <td key={array.id}>{array.sum}</td>
-                      <td key={array.id}>{array.category}</td>
+    const handleSubmit= async (e)=>{
+        e.preventDefault();
+        await getReports(value.year, value.month);
+    }
+    const handleDelete= async (reportId, category)=>{
+        await deleteReport(reportId,value.year, value.month, category);
+    }
+    return (
+        <div>
+            <div className={array.length > 0 ? 'right' :'center'}>
+                <form onSubmit={handleSubmit}>
+                    <h1>Report</h1>
 
-                  </tr>
-                  :
-                  <tr>
-                      <td colSpan={3}></td>
-                      <td>{array.totalSum}</td>
-                  </tr>))}
+                    <label>
+                        Month:
+                        <input
+                            name="month"
+                            type="number"
+                            min='1'
+                            max='12'
+                            required
+                            onChange={inputHandler}
+                        />
+                    </label>
+                    <label>
+                        Year:
+                        <input
+                            name="year"
+                            type="number"
+                            required
+                            onChange={inputHandler}
+                        />
+                    </label>
+                    <button disabled={isLoading}>Submit</button>
+                    {
+                        error && <div className='error'>{error}</div>
+                    }
+                </form>
+            </div>
+            {array.length > 0 &&
+                <div className='reports-left'>
+                    {
+                        array.map(report => {
+                            if(report.totalForMonth === undefined)
+                            {
+                                if(report.category !== undefined)
+                                {
+                                    return <div className="workout-details2" key={report.reportId}>
+                                        <ReportDetails  key={report.reportId} reportId= {report.reportId} category={report.category} description={report.description}
+                                                        sum={report.sum} year={value.year} month={value.month} categoyTotal ={value.totalForCategory}/>
+                                        <span className="span-delete" value={report.reportId} onClick={async ()=>await handleDelete(report.reportId, report.category)}>DELETE</span>
+                                    </div>
+                                }
 
-              </tbody>
-          </Table>)}
-      </div>
-  );
+
+                            }
+                        })}
+                    <div className='workout-details'>
+                        <p><strong>Total for {value.month}/{value.year}: {total}$ </strong></p>
+
+                    </div>
+
+
+                </div>
+            }
+        </div>)
+
+
+
 }

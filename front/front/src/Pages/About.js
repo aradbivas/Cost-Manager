@@ -3,7 +3,7 @@ import React from "react";
 function About()
 {
 
-    return <div>
+    return <div className='center'>
         <br/>
             <h1>This is Cost Manager</h1>
             <p>this app desigend to help you keep up with your monthly costs</p>

@@ -7,7 +7,8 @@ const app = express();
 const reportRoutes = require('./Routes/Report')
 const userRoutes = require('./Routes/User')
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors())
+
+app.use(cors());
 app.use(express.json({
     type: ['application/json', 'text/plain']
 }))

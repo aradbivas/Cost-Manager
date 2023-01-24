@@ -16,6 +16,7 @@ const Login = () =>
         await login(email,password);
     }
     return (
+        <div className='center'>
         <form className='login' onSubmit={handleSubmit}>
             <h3>Login</h3>
             <label>Email</label>
@@ -34,6 +35,7 @@ const Login = () =>
             {
                 error && <div className='error'>{error}</div>
             }        </form>
+        </div>
     )
 }
 

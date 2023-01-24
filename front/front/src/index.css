@@ -6,10 +6,7 @@ body {
   font-family: Lato;
   height: 97vh;
   /*width: 100%;*/
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
 }
 
 form {
@@ -22,6 +19,8 @@ form {
   border-radius: 6px;
   box-shadow: 0px 8px 36px #222;
   background-color: #fefefe;
+  justify-content: center;
+  align-items: center;
 }
 
 form > h1 {
@@ -56,11 +55,10 @@ input, select {
 select {
   display: block;
   width: 100%;
-  height: 35px;
+  height: 40px;
 }
 input[type="checkbox"] {
   display: inline-block;
-  width: auto;
   margin-top: 2em;
   margin-right: 10px;
 }
@@ -73,7 +71,7 @@ button {
   padding: 	0.938em;
   border: none;
   border-radius: 4px;
-  background-color: #22223B;
+  background-color: #2b2b2b;
   color: #fefefe;
 }
 button:hover {
@@ -106,4 +104,81 @@ div.message{
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+}
+.workout-details {
+  background: #ffffff;
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding: 20px;
+  position: relative;
+}
+.workout-details2 {
+  background: #ffffff;
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+.workout-details h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  color: var(--primary);
+}
+.workout-details p {
+  margin: 5px;
+  font-size: 0.9em;
+  color: #555;
+}
+.span-delete {
+  position: absolute;
+  top: 60px;
+  background-color: #2b2b2b;
+  border-radius: 5px;
+
+  right: 1px;
+  cursor: pointer;
+  padding: 6px;
+  margin: 5px;
+  color: #ffffff;
+}
+.span-delete:hover{
+  position: absolute;
+  background-color: #4A4E69;
+  color: #f80f0f;
+  box-shadow: 4px 4px 3px #1a1818;
+
+}
+
+.center
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
+
+}
+.right
+{
+  position: absolute;
+  top: 15px;
+  right: 50px;
+  margin-top: 5%;
+  margin-right: 5%;
+
+}
+.reports-left
+{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 5%;
+  margin-left: 5%;
 }
